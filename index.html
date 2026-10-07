@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#53152e">
+  <title>Anghely, tengo algo que decirte 💗</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600&display=swap');
+
+    :root {
+      --vino: #681d3d;
+      --rosa: #a8486b;
+      --papel: #fff6f4;
+      --texto: #592a3c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100svh;
+      padding: 24px 16px;
+      display: grid;
+      place-items: center;
+      font-family: "DM Sans", sans-serif;
+      color: var(--texto);
+      background:
+        radial-gradient(ellipse at top, #913958, transparent 65%),
+        linear-gradient(135deg, #481328, #240b17);
+    }
+
+    .pagina {
+      width: min(100%, 740px);
+      text-align: center;
+    }
+
+    .marca {
+      margin: 0 0 22px;
+      color: #f8dce6;
+      font: italic 30px "Cormorant Garamond", Georgia, serif;
+    }
+
+    .carta {
+      position: relative;
+      padding: 48px 45px 30px;
+      background: var(--papel);
+      border: 1px solid #eec5ce;
+      box-shadow: 0 25px 90px #16071166;
+      animation: aparecer 900ms ease both;
+    }
+
+    .carta::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid #bd829644;
+      pointer-events: none;
+    }
+
+    .etiqueta {
+      margin: 0 0 22px;
+      color: #976478;
+      font-size: 12px;
+      letter-spacing: 3px;
+      line-height: 1.7;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    h1 { font-size: clamp(58px, 10vw, 84px); }
+    h2 { font-size: clamp(45px, 8vw, 65px); }
+
+    h1 em, h2 em {
+      display: block;
+      margin-top: 8px;
+      color: var(--rosa);
+      font-weight: 500;
+    }
+
+    .separador {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 25px 0;
+      color: #ad5a7a;
+      font-size: 25px;
+    }
+
+    .separador::before,
+    .separador::after {
+      content: "";
+      width: 55px;
+      height: 1px;
+      background: #d8a9b8;
+    }
+
+    .texto {
+      margin: 0 auto 18px;
+      max-width: 530px;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .secundario { color: #856272; }
+
+    .pregunta {
+      margin: 28px 0 23px;
+      font: 600 clamp(30px, 6vw, 39px)
+        "Cormorant Garamond", Georgia, serif;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 18px 40px;
+      background: var(--vino);
+      color: white;
+      font: 600 18px "DM Sans", sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 25px #681d3d25;
+      transition: transform 200ms, background 200ms;
+    }
+
+    button:hover {
+      background: #8d2b51;
+      transform: translateY(-3px);
+    }
+
+    button:focus-visible {
+      outline: 3px solid #b9577b;
+      outline-offset: 5px;
+    }
+
+    button:disabled { opacity: .6; cursor: wait; }
+
+    .nota {
+      margin: 18px 0 0;
+      color: #936c7d;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .firma {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #936c7d;
+    }
+
+    .firma span {
+      display: block;
+      margin-top: 4px;
+      color: var(--vino);
+      font: italic 35px "Cormorant Garamond", Georgia, serif;
+    }
+
+    .pie-carta {
+      margin-top: 27px;
+      padding-top: 18px;
+      border-top: 1px solid #e3c5cf;
+      color: #9b7180;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 22px;
+      color: #dfadbf;
+      font: italic 14px Georgia, serif;
+    }
+
+    .contador {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 23px 0;
+    }
+
+    .unidad {
+      padding: 19px 4px;
+      border: 1px solid #dfbcc9;
+      border-radius: 5px;
+      background: #f8e7ed;
+    }
+
+    .unidad strong {
+      display: block;
+      font: 600 clamp(30px, 7vw, 56px)
+        "Cormorant Garamond", Georgia, serif;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+
+    .unidad span { font-size: 12px; color: #896171; }
+
+    .frase-final {
+      margin: 26px 0 0;
+      font: italic 27px/1.4 "Cormorant Garamond", Georgia, serif;
+      color: var(--rosa);
+    }
+
+    .error {
+      margin-top: 18px;
+      padding: 12px;
+      background: #f6dce4;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    [hidden] { display: none !important; }
+
+    #celebracion {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .corazon {
+      position: absolute;
+      top: -60px;
+      color: #f6a5c2;
+      animation: caer 4s ease-in forwards;
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes caer {
+      to {
+        transform: translateY(115vh) rotate(300deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 20px 12px; }
+      .carta { padding: 35px 23px 25px; }
+      .etiqueta { font-size: 10px; letter-spacing: 2px; }
+      .texto { font-size: 15px; }
+      button { width: 100%; }
+      .contador { gap: 6px; }
+      .unidad { padding: 16px 3px; }
+      .unidad span { font-size: 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      #celebracion { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="pagina">
+    <p class="marca">tú & yo</p>
+
+    <article class="carta">
+      <section id="declaracion">
+        <p class="etiqueta">HAY ALGO QUE QUIERO DECIRTE</p>
+
+        <h1>Anghely,<em>me encantas.</em></h1>
+
+        <div class="separador" aria-hidden="true">♡</div>
+
+        <p class="texto">
+          No sé en qué momento pasó, pero entre conversaciones,
+          sonrisas y ganas de verte, te volviste alguien
+          muy especial para mí.
+        </p>
+
+        <p class="texto secundario">
+          Me gusta cómo se siente el mundo cuando estás cerca.
+          Quiero conocerte un poquito más cada día, acompañarte
+          en tus sueños y compartir contigo los pequeños
+          momentos que hacen bonita la vida.
+        </p>
+
+        <p class="texto secundario">
+          No te prometo una historia perfecta, pero sí cariño,
+          respeto y ganas de construir algo bonito contigo.
+        </p>
+
+        <p class="pregunta">¿Quieres estar conmigo?</p>
+
+        <button id="aceptar" type="button">Sí, quiero ♡</button>
+
+        <p class="nota">
+          Nuestra historia empieza cuando tú quieras.
+        </p>
+      </section>
+
+      <section id="historia" hidden>
+        <p class="etiqueta">EL PRIMER CAPÍTULO DE NOSOTROS</p>
+
+        <h2>Ella dijo sí.<em>Y empezó lo bonito.</em></h2>
+
+        <div class="separador" aria-hidden="true">♡</div>
+
+        <p class="texto">
+          Anghely, qué bonito es empezar esta historia contigo.
+          Desde ese instante, cada segundo tiene algo de nosotros.
+        </p>
+
+        <p class="etiqueta" style="margin-top: 28px">
+          NUESTRO TIEMPO JUNTOS
+        </p>
+
+        <div class="contador" role="timer" aria-label="Tiempo juntos">
+          <div class="unidad">
+            <strong id="dias">00</strong><span>días</span>
+          </div>
+
+          <div class="unidad">
+            <strong id="horas">00</strong><span>horas</span>
+          </div>
+
+          <div class="unidad">
+            <strong id="minutos">00</strong><span>minutos</span>
+          </div>
+
+          <div class="unidad">
+            <strong id="segundos">00</strong><span>segundos</span>
+          </div>
+        </div>
+
+        <p id="fecha" class="nota"></p>
+
+        <p class="frase-final">
+          Que este sea el primero de muchos días bonitos.
+        </p>
+      </section>
+
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <div class="firma">
+        Con amor,
+        <span>Jeferson</span>
+      </div>
+
+      <div class="pie-carta">
+        UNA PREGUNTA SENCILLA. UN SENTIMIENTO ENORME.
+      </div>
+    </article>
+
+    <footer>Para Anghely, con todo mi cariño.</footer>
+  </main>
+
+  <div id="celebracion" aria-hidden="true"></div>
+
+  <script>
+    const CLAVE = "jeferson-anghely-inicio-v1";
+    const $ = (id) => document.getElementById(id);
+
+    let fechaInicio = null;
+    let intervalo = null;
+
+    function leerFecha() {
+      const guardada = localStorage.getItem(CLAVE);
+
+      if (guardada === null) return null;
+
+      const numero = Number(guardada);
+
+      return Number.isFinite(numero) && numero > 0
+        ? numero
+        : null;
+    }
+
+    function mostrarError(mensaje) {
+      $("error").textContent = mensaje;
+      $("error").hidden = false;
+    }
+
+    function actualizarContador() {
+      if (fechaInicio === null) return;
+
+      const total = Math.max(
+        0,
+        Math.floor((Date.now() - fechaInicio) / 1000)
+      );
+
+      const valores = {
+        dias: Math.floor(total / 86400),
+        horas: Math.floor(total / 3600) % 24,
+        minutos: Math.floor(total / 60) % 60,
+        segundos: total % 60
+      };
+
+      for (const [id, valor] of Object.entries(valores)) {
+        $(id).textContent = String(valor).padStart(2, "0");
+      }
+    }
+
+    function mostrarHistoria(fecha) {
+      fechaInicio = fecha;
+
+      $("declaracion").hidden = true;
+      $("historia").hidden = false;
+      $("error").hidden = true;
+
+      $("fecha").textContent =
+        "Nuestro comienzo: " +
+        new Intl.DateTimeFormat("es-PE", {
+          dateStyle: "long",
+          timeStyle: "short",
+          timeZone: "America/Lima"
+        }).format(new Date(fecha)) +
+        " · hora de Perú ♡";
+
+      actualizarContador();
+
+      clearInterval(intervalo);
+      intervalo = setInterval(actualizarContador, 1000);
+    }
+
+    function celebrar() {
+      if (
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) return;
+
+      const contenedor = $("celebracion");
+      contenedor.replaceChildren();
+
+      for (let i = 0; i < 36; i++) {
+        const corazon = document.createElement("span");
+
+        corazon.className = "corazon";
+        corazon.textContent = "♥";
+        corazon.style.left = Math.random() * 100 + "%";
+        corazon.style.fontSize = 15 + Math.random() * 30 + "px";
+        corazon.style.animationDelay = Math.random() * 1.5 + "s";
+
+        contenedor.appendChild(corazon);
+      }
+
+      setTimeout(() => contenedor.replaceChildren(), 6000);
+    }
+
+    async function aceptar() {
+      const boton = $("aceptar");
+      boton.disabled = true;
+
+      try {
+        const guardar = () => {
+          // Conserva el primer sí guardado.
+          const existente = leerFecha();
+          const fecha = existente ?? Date.now();
+
+          if (existente === null) {
+            localStorage.setItem(CLAVE, String(fecha));
+          }
+
+          mostrarHistoria(fecha);
+
+          if (existente === null) celebrar();
+        };
+
+        // Evita que dos pestañas sobrescriban el primer sí
+        // en navegadores que admiten Web Locks.
+        if (navigator.locks) {
+          await navigator.locks.request(CLAVE, guardar);
+        } else {
+          guardar();
+        }
+      } catch {
+        mostrarError(
+          "El navegador no permitió guardar nuestro comienzo. " +
+          "Activa el almacenamiento de este sitio y vuelve a intentarlo."
+        );
+      } finally {
+        boton.disabled = false;
+      }
+    }
+
+    $("aceptar").addEventListener("click", aceptar);
+
+    // Actualiza otras pestañas abiertas en el mismo navegador.
+    window.addEventListener("storage", (evento) => {
+      if (evento.key !== CLAVE || evento.newValue === null) return;
+
+      const fecha = Number(evento.newValue);
+
+      if (Number.isFinite(fecha) && fecha > 0) {
+        mostrarHistoria(fecha);
+      }
+    });
+
+    try {
+      const guardada = leerFecha();
+
+      if (guardada !== null) mostrarHistoria(guardada);
+    } catch {
+      mostrarError(
+        "Activa el almacenamiento de este sitio para poder " +
+        "conservar la fecha cuando aceptes."
+      );
+    }
+  </script>
+</body>
+</html>
